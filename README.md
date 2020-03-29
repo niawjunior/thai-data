@@ -1,3 +1,5 @@
+[![npm version](https://badge.fury.io/js/thai-data.svg)](https://badge.fury.io/js/thai-data)
+
 ## รวมข้อมูล ตำบล อำเภอ และ จังหวัด ในประเทศไทย (77 จังหวัด) อ้างอิงตาม รหัสไปรษณีย์ไทย
 
 * สำหรับคนที่สนใจอยาก contribute สามารถส่ง pull request มาได้ที่ https://github.com/niawjunior/thai-data
