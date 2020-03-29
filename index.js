@@ -35,7 +35,7 @@ function districtName(zipCode) {
 function provinceName(zipCode) {
   var zip = String(zipCode)
 
-  if (zipCode && zip.length == 5 && code.includes(zip)) {
+  if (zip && zip.length == 5 && code.includes(zip)) {
     var result = data.find(function(item) {
        return item.zipCode === zip
     }).provinceList[0].provinceName
@@ -69,7 +69,7 @@ function autoSuggestion(zipCode, subDistrict) {
       provinceName: provinceName(zipCode),
       zipCode: zipCode 
     }
-  } else if (zipCode && zip.length == 5 && subDistrict) {
+  } else if (zip && zip.length == 5 && subDistrict) {
     var allData = allField(zipCode)
     var districtId = (allData.subDistrictList.find(function(item) {
       return item.subDistrictName === subDistrict
