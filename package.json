@@ -1,0 +1,25 @@
+{
+  "name": "thai-data",
+  "version": "1.0.2",
+  "description": "รวมข้อมูล ตำบล อำเภอ และ จังหวัด ในประเทศไทย (77 จังหวัด) อ้างอิงตาม รหัสไปรษณีย์ไทย",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/niawjunior/thai-data.git"
+  },
+  "keywords": [
+    "thailand-address",
+    "thailand",
+    "thailand-post"
+  ],
+  "author": "niawjunior",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/niawjunior/thai-data/issues"
+  },
+  "homepage": "https://github.com/niawjunior/thai-data#readme",
+  "dependencies": {}
+}
