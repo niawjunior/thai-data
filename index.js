@@ -1,8 +1,4 @@
-var fs = require('fs');
-var path = require('path');
-
-var dir = path.join(__dirname, '/data.json');
-var data = JSON.parse(fs.readFileSync(dir));
+var data = require('./data.json')
 
 var code = data.map(function(item) {
   return item.zipCode
