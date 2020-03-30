@@ -4,6 +4,8 @@
 
 * สำหรับคนที่สนใจอยาก contribute สามารถส่ง pull request มาได้ที่ https://github.com/niawjunior/thai-data
 
+## ตัวอย่าง https://thai-data.netlify.com/
+
 <br>
 
 ### วิธีติดตั้งใช้งาน 
