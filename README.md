@@ -2,7 +2,7 @@
 
 ## รวมข้อมูล ตำบล อำเภอ และ จังหวัด ในประเทศไทย (77 จังหวัด) อ้างอิงตาม รหัสไปรษณีย์ไทย
 
-* สำหรับคนที่สนใจอยาก contribute สามารถส่ง pull request มาได้ที่ https://github.com/niawjunior/thai-data
+- สำหรับคนที่สนใจอยาก contribute สามารถส่ง pull request มาได้ที่ https://github.com/niawjunior/thai-data
 
 ## ดูตัวอย่าง การนำไปใช้งาน https://thai-data.netlify.com/
 
@@ -10,28 +10,30 @@
 
 <br>
 
-### วิธีติดตั้งใช้งาน 
+### วิธีติดตั้งใช้งาน
+
 `npm i thai-data -s`
 
-### วิธีเรียกใช้งาน 
+### วิธีเรียกใช้งาน
+
 `var thai = require('thai-data')`
 
 ### ตัวอย่างโครงสร้าง ของข้อมูล
+
 ![alt text](demo/demo.png)
 
-
 ### มีทั้งหมด 6 function ด้วยกัน ดังนี้
-![alt text](demo/methods.png)
 
+![alt text](demo/methods.png)
 
 ### 1. เรียกดูข้อมูลที่มีอยู่ทั้งหมด (ทั่วประเทศ)
 
-``` javascript
+```javascript
 var allData = thai.allData()
 
 console.log(allData)
 
-{ 
+{
   zipCode: '46180',
     subDistrictList:
      [ [Object],
@@ -47,7 +49,7 @@ console.log(allData)
     districtList: [ [Object], [Object] ],
     provinceList: [ [Object] ]
 },
-{ 
+{
   zipCode: '46190',
     subDistrictList:
      [ [Object], [Object], [Object], [Object], [Object], [Object] ],
@@ -68,10 +70,11 @@ console.log(allData)
 ```
 
 ### 2. เรียกดูข้อมูลตามรหัสไปรษณีย์
-``` javascript
-var allField = thai.allField(44130)
 
-console.log(allField)
+```javascript
+var getAllData = thai.getAllData(44130)
+
+console.log(getAllData)
 
 { zipCode: '44130',
   subDistrictList:
@@ -162,14 +165,14 @@ console.log(allField)
 
 ```
 
-
 ### 3. ข้อหาข้อมูลแบบอัตโนมัติ โดย ใช้รหัสไปรษณีย์ และ ตำบล หรือ ใช้รหัสไปรษณีย์ เพียงอย่างเดียว
 
 #### 3.1 ใช้ รหัสไปรษณีย์เพียงอย่างเดียว
-``` javascript
-var autoSuggestion = thai.autoSuggestion(44130)
 
-console.log(autoSuggestion)
+```javascript
+var getAutoSuggestion = thai.getAutoSuggestion(44130)
+
+console.log(getAutoSuggestion)
 
 { subDistrict:
    [ 'โนนแดง',
@@ -199,68 +202,64 @@ console.log(autoSuggestion)
 ```
 
 #### 3.2 ใช้ รหัสไปรษณีย์ และ ตำบล
-``` javascript
-var autoSuggestion = thai.autoSuggestion(44130, 'เลิงแฝก')
 
-console.log(autoSuggestion)
+```javascript
+var getAutoSuggestion = thai.getAutoSuggestion(44130, 'เลิงแฝก')
 
-{ 
+console.log(getAutoSuggestion)
+
+{
   subDistrict: 'เลิงแฝก',
   districtName: 'กุดรัง',
   provinceName: 'มหาสารคาม',
-  zipCode: 44130 
+  zipCode: 44130
 }
 
 ```
 
 ### 4. แสดงรายชื่อตำบลทั้งหมด ตามรหัสไปรษณีย์
-``` javascript
-var subDistrictName = thai.subDistrictName(44130)
 
-console.log(subDistrictName)
+```javascript
+var getSubDistrictNames = thai.getSubDistrictNames(44130);
 
-[ 
-  'โนนแดง',
-  'หนองโก',
-  'โนนราษี',
-  'หนองสิม',
-  'กำพี้',
-  'หนองม่วง',
-  'ยาง',
-  'วังไชย',
-  'วังใหม่',
-  'บ่อใหญ่',
-  'หนองคูขาด',
-  'บรบือ',
-  'บัวมาศ',
-  'ห้วยเตย',
-  'หนองจิก',
-  'หนองแวง',
-  'ดอนงัว',
-  'เลิงแฝก',
-  'นาโพธิ์',
-  'กุดรัง' 
-]
-
+console.log(getSubDistrictNames)[
+  ("โนนแดง",
+  "หนองโก",
+  "โนนราษี",
+  "หนองสิม",
+  "กำพี้",
+  "หนองม่วง",
+  "ยาง",
+  "วังไชย",
+  "วังใหม่",
+  "บ่อใหญ่",
+  "หนองคูขาด",
+  "บรบือ",
+  "บัวมาศ",
+  "ห้วยเตย",
+  "หนองจิก",
+  "หนองแวง",
+  "ดอนงัว",
+  "เลิงแฝก",
+  "นาโพธิ์",
+  "กุดรัง")
+];
 ```
 
-
 ### 5. แสดงรายชื่ออำเภอทั้งหมด ตามรหัสไปรษณีย์
-``` javascript
-var districtName = thai.districtName(44130)
 
-console.log(districtName)
+```javascript
+var getDistrictNames = thai.getDistrictNames(44130);
 
-[ 'กุดรัง', 'บรบือ' ]
-
+console.log(getDistrictNames)[("กุดรัง", "บรบือ")];
 ```
 
 ### 6. แสดงชื่อจังหวัด ตามรหัสไปรษณีย์
-``` javascript
-var provinceName = thai.provinceName(44130)
 
-console.log(provinceName)
+```javascript
+var getProvinceName = thai.getProvinceName(44130);
 
-มหาสารคาม
+console.log(getProvinceName);
 
+มหาสารคาม;
 ```
