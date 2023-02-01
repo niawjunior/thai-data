@@ -1,109 +1,76 @@
-var data = require('./data.json')
+const data = require("./data.json");
+const codes = data.map((item) => item.zipCode);
 
-var code = data.map(function(item) {
-  return item.zipCode
-})
-
-function subDistrictName(zipCode) {
-  var zip = String(zipCode)
-  if (zip && zip.length == 5 && code.includes(zip)) {
-    var result = data.find(function(item) {
-       return item.zipCode === zip
-    }).subDistrictList.map(function(item) {
-      return item.subDistrictName
-    })
-    return result
-  } else {
-    return []
-  }
+function getDataForZipCode(zipCode) {
+  const zip = String(zipCode);
+  return zip && zip.length === 5 && codes.includes(zip)
+    ? data.find((item) => item.zipCode === zip)
+    : null;
 }
 
-function districtName(zipCode) {
-  var zip = String(zipCode)
-  if (zip && zip.length == 5 && code.includes(zip)) {
-    var result = data.find(function(item) {
-       return item.zipCode === zip
-    }).districtList.map(function(item) {
-        return item.districtName
-    })
-    return result
-  } else {
-    return []
-  }
+function getSubDistrictNames(zipCode) {
+  const dataForZipCode = getDataForZipCode(zipCode);
+  return dataForZipCode
+    ? dataForZipCode.subDistrictList.map((item) => item.subDistrictName)
+    : [];
 }
 
-function provinceName(zipCode) {
-  var zip = String(zipCode)
-
-  if (zip && zip.length == 5 && code.includes(zip)) {
-    var result = data.find(function(item) {
-       return item.zipCode === zip
-    }).provinceList[0].provinceName
-    return result
-  } else {
-    return null
-  }
+function getDistrictNames(zipCode) {
+  const dataForZipCode = getDataForZipCode(zipCode);
+  return dataForZipCode
+    ? dataForZipCode.districtList.map((item) => item.districtName)
+    : [];
 }
 
-function allField(zipCode) {
-  var zip = String(zipCode)
-  if (zip && zip.length == 5 && code.includes(zip)) {
-    var result = data.find(function(item) {
-       return item.zipCode === zip
-    })
-    return result
-  } else {
-    return []
-  }
+function getProvinceName(zipCode) {
+  const dataForZipCode = getDataForZipCode(zipCode);
+  return dataForZipCode ? dataForZipCode.provinceList[0].provinceName : null;
 }
 
-function autoSuggestion(zipCode, subDistrict) {
-  var zip = String(zipCode)
-  if (zip && zip.length == 5 && !subDistrict && code.includes(zip)) {
-    var allData = allField(zipCode).subDistrictList.map(function(item) {
-      return item.subDistrictName
-    })
-    return {
-      subDistrict: allData,
-      districtName: null,
-      provinceName: provinceName(zipCode),
-      zipCode: zipCode 
-    }
-  } else if (zip && zip.length == 5 && subDistrict) {
-    var allData = allField(zipCode)
-    var districtId = (allData.subDistrictList.find(function(item) {
-      return item.subDistrictName === subDistrict
-    }) || []).districtId
-
-    var districtName = (allData.districtList.find(function(item) {
-      return item.districtId === districtId
-    }) || []).districtName
-
-    return {
-      subDistrict: subDistrict,
-      districtName: districtName,
-      provinceName: provinceName(allData.zipCode),
-      zipCode: zipCode 
-    }
-  } else {
+function getAutoSuggestion(zipCode, subDistrict) {
+  const zip = String(zipCode);
+  if (!zip || zip.length !== 5 || !codes.includes(zip)) {
     return {
       subDistrict: null,
       districtName: null,
       provinceName: null,
-      zipCode: null 
-    }
+      zipCode: null,
+    };
   }
-}
 
-function allData() {
-  return data
+  const dataForZipCode = getDataForZipCode(zipCode);
+  if (!subDistrict) {
+    return {
+      subDistrict: dataForZipCode.subDistrictList.map(
+        (item) => item.subDistrictName
+      ),
+      districtName: null,
+      provinceName: getProvinceName(zip),
+      zipCode: zip,
+    };
+  }
+
+  const { districtId } =
+    dataForZipCode.subDistrictList.find(
+      (item) => item.subDistrictName === subDistrict
+    ) || {};
+  const { districtName } =
+    dataForZipCode.districtList.find(
+      (item) => item.districtId === districtId
+    ) || {};
+
+  return {
+    subDistrict,
+    districtName,
+    provinceName: getProvinceName(dataForZipCode.zipCode),
+    zipCode: zip,
+  };
 }
 
 module.exports = {
-  subDistrictName,
-  districtName,
-  provinceName,
-  allField,
-  allData,
-  autoSuggestion 
-}
+  getSubDistrictNames,
+  getDistrictNames,
+  getProvinceName,
+  getAllData: () => data,
+  getAutoSuggestion,
+};
