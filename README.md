@@ -29,9 +29,9 @@
 ### 1. เรียกดูข้อมูลที่มีอยู่ทั้งหมด (ทั่วประเทศ)
 
 ```javascript
-var allData = thai.allData()
+var getAllData = thai.getAllData()
 
-console.log(allData)
+console.log(getAllData)
 
 {
   zipCode: '46180',
@@ -72,9 +72,9 @@ console.log(allData)
 ### 2. เรียกดูข้อมูลตามรหัสไปรษณีย์
 
 ```javascript
-var getAllData = thai.getAllData(44130)
+var getDataForZipCode = thai.getDataForZipCode(44130)
 
-console.log(getAllData)
+console.log(getDataForZipCode)
 
 { zipCode: '44130',
   subDistrictList:

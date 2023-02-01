@@ -73,4 +73,5 @@ module.exports = {
   getProvinceName,
   getAllData: () => data,
   getAutoSuggestion,
+  getDataForZipCode,
 };
