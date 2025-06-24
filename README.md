@@ -28,69 +28,72 @@ yarn add thai-data
 
 ```typescript
 import {
-  getDataForZipCode,
-  getSubDistrictNames,
-  getDistrictNames,
-  getProvinceName,
-  getAutoSuggestion,
-  getAllData,
+  getAddressByZipCode,
+  getSubdistrictsByZipCode,
+  getDistrictsByZipCode,
+  getProvinceByZipCode,
+  getAddressSuggestions,
+  getAllAddressData,
 } from "thai-data";
 
 // Get all data for a specific postal code
-const addressData = getDataForZipCode("10110");
+const addressData = getAddressByZipCode("10110");
 
 // Get sub-district names for a postal code
-const subDistricts = getSubDistrictNames("10110");
+const subDistricts = getSubdistrictsByZipCode("10110");
 
 // Get district names for a postal code
-const districts = getDistrictNames("10110");
+const districts = getDistrictsByZipCode("10110");
 
 // Get province name for a postal code
-const province = getProvinceName("10110");
+const province = getProvinceByZipCode("10110");
 
 // Get address suggestions
-const suggestion = getAutoSuggestion("10110", "บางรัก");
+const suggestion = getAddressSuggestions("10110", "บางรัก");
 
 // Get all address data
-const allData = getAllData();
+const allData = getAllAddressData();
 ```
 
 ### CommonJS
 
 ```javascript
 const {
-  getDataForZipCode,
-  getSubDistrictNames,
-  // ... other functions
+  getAddressByZipCode,
+  getSubdistrictsByZipCode,
+  getDistrictsByZipCode,
+  getProvinceByZipCode,
+  getAddressSuggestions,
+  getAllAddressData,
 } = require("thai-data");
 
-const addressData = getDataForZipCode("10110");
+const addressData = getAddressByZipCode("10110");
 console.log(addressData);
 ```
 
 ## API Reference
 
-### `getDataForZipCode(zipCode: string | number): ZipCodeData | null`
+### `getAddressByZipCode(zipCode: string | number): ZipCodeData | null`
 
 Get complete address data for a specific postal code.
 
-### `getSubDistrictNames(zipCode: string | number): string[]`
+### `getSubdistrictsByZipCode(zipCode: string | number): string[]`
 
 Get all sub-district names for a given postal code.
 
-### `getDistrictNames(zipCode: string | number): string[]`
+### `getDistrictsByZipCode(zipCode: string | number): string[]`
 
 Get all district names for a given postal code.
 
-### `getProvinceName(zipCode: string | number): string | null`
+### `getProvinceByZipCode(zipCode: string | number): string | null`
 
 Get the province name for a given postal code.
 
-### `getAutoSuggestion(zipCode: string | number, subDistrict?: string): AddressSuggestion`
+### `getAddressSuggestions(zipCode: string | number, subDistrict?: string): AddressSuggestion`
 
 Get address suggestions based on postal code and optional sub-district.
 
-### `getAllData(): ZipCodeData[]`
+### `getAllAddressData(): ZipCodeData[]`
 
 Get all address data.
 
@@ -154,197 +157,69 @@ ISC © [Niaw Junior](https://github.com/niawjunior)
 
 ````
 
-### 2. เรียกดูข้อมูลตามรหัสไปรษณีย์
+## Examples
 
-```javascript
-var getDataForZipCode = thai.getDataForZipCode(44130)
+### Get Address by Zip Code
 
-console.log(getDataForZipCode)
+```typescript
+import { getAddressByZipCode } from 'thai-data';
 
-{ zipCode: '44130',
-  subDistrictList:
-   [ { subDistrictId: '440608',
-       districtId: '482',
-       provinceId: '32',
-       subDistrictName: 'โนนแดง' },
-     { subDistrictId: '440619',
-       districtId: '482',
-       provinceId: '32',
-       subDistrictName: 'หนองโก' },
-     { subDistrictId: '440607',
-       districtId: '482',
-       provinceId: '32',
-       subDistrictName: 'โนนราษี' },
-     { subDistrictId: '440618',
-       districtId: '482',
-       provinceId: '32',
-       subDistrictName: 'หนองสิม' },
-     { subDistrictId: '440606',
-       districtId: '482',
-       provinceId: '32',
-       subDistrictName: 'กำพี้' },
-     { subDistrictId: '440605',
-       districtId: '482',
-       provinceId: '32',
-       subDistrictName: 'หนองม่วง' },
-     { subDistrictId: '440616',
-       districtId: '482',
-       provinceId: '32',
-       subDistrictName: 'ยาง' },
-     { subDistrictId: '440604',
-       districtId: '482',
-       provinceId: '32',
-       subDistrictName: 'วังไชย' },
-     { subDistrictId: '440615',
-       districtId: '482',
-       provinceId: '32',
-       subDistrictName: 'วังใหม่' },
-     { subDistrictId: '440602',
-       districtId: '482',
-       provinceId: '32',
-       subDistrictName: 'บ่อใหญ่' },
-     { subDistrictId: '440613',
-       districtId: '482',
-       provinceId: '32',
-       subDistrictName: 'หนองคูขาด' },
-     { subDistrictId: '440601',
-       districtId: '482',
-       provinceId: '32',
-       subDistrictName: 'บรบือ' },
-     { subDistrictId: '440611',
-       districtId: '482',
-       provinceId: '32',
-       subDistrictName: 'บัวมาศ' },
-     { subDistrictId: '441205',
-       districtId: '488',
-       provinceId: '32',
-       subDistrictName: 'ห้วยเตย' },
-     { subDistrictId: '440610',
-       districtId: '482',
-       provinceId: '32',
-       subDistrictName: 'หนองจิก' },
-     { subDistrictId: '441204',
-       districtId: '488',
-       provinceId: '32',
-       subDistrictName: 'หนองแวง' },
-     { subDistrictId: '440620',
-       districtId: '482',
-       provinceId: '32',
-       subDistrictName: 'ดอนงัว' },
-     { subDistrictId: '441203',
-       districtId: '488',
-       provinceId: '32',
-       subDistrictName: 'เลิงแฝก' },
-     { subDistrictId: '441202',
-       districtId: '488',
-       provinceId: '32',
-       subDistrictName: 'นาโพธิ์' },
-     { subDistrictId: '441201',
-       districtId: '488',
-       provinceId: '32',
-       subDistrictName: 'กุดรัง' } ],
-  districtList:
-   [ { districtId: '488', proviceId: '32', districtName: 'กุดรัง' },
-     { districtId: '482', proviceId: '32', districtName: 'บรบือ' } ],
-  provinceList: [ { provinceId: '32', provinceName: 'มหาสารคาม' } ] }
+const addressData = getAddressByZipCode('10110');
 
+console.log(addressData);
+// {
+//   zipCode: '10110',
+//   subDistrictList: [
+//     { subDistrictId: '100101', districtId: '1001', provinceId: '10', subDistrictName: 'พระบรมมหาราชวัง' },
+//     // ... more sub-districts
+//   ],
+//   districtList: [
+//     { districtId: '1001', provinceId: '10', districtName: 'พระนคร' },
+//     // ... more districts
+//   ],
+//   provinceList: [
+//     { provinceId: '10', provinceName: 'กรุงเทพมหานคร' }
+//   ]
+// }
+```
+
+### Get Address Suggestions
+
+```typescript
+import { getAddressSuggestions } from 'thai-data';
+
+// Get suggestions with just zip code
+const suggestions = getAddressSuggestions('10110');
+console.log(suggestions);
+// {
+//   subDistrict: [...], // Array of all sub-districts for this zip code
+//   districtName: '...', // Single district name if only one exists
+//   provinceName: '...', // Province name
+//   zipCode: '10110'
+// }
+
+// Get suggestions with zip code and sub-district filter
+const filteredSuggestions = getAddressSuggestions('10110', 'บางรัก');
+console.log(filteredSuggestions);
+// {
+//   subDistrict: 'บางรัก', // Matching sub-district name
+//   districtName: 'บางรัก', // District name
+//   provinceName: 'กรุงเทพมหานคร', // Province name
+//   zipCode: '10500' // Matching zip code
+// }
+```
+
+### Get All Address Data
+
+```typescript
+import { getAllAddressData } from 'thai-data';
+
+const allAddresses = getAllAddressData();
+console.log(`Total zip codes: ${allAddresses.length}`);
+// Output: Total zip codes: [number of zip codes]
+```
+
+## License
+
+ISC © [Niaw Junior](https://github.com/niawjunior)
 ````
-
-### 3. ข้อหาข้อมูลแบบอัตโนมัติ โดย ใช้รหัสไปรษณีย์ และ ตำบล หรือ ใช้รหัสไปรษณีย์ เพียงอย่างเดียว
-
-#### 3.1 ใช้ รหัสไปรษณีย์เพียงอย่างเดียว
-
-```javascript
-var getAutoSuggestion = thai.getAutoSuggestion(44130)
-
-console.log(getAutoSuggestion)
-
-{ subDistrict:
-   [ 'โนนแดง',
-     'หนองโก',
-     'โนนราษี',
-     'หนองสิม',
-     'กำพี้',
-     'หนองม่วง',
-     'ยาง',
-     'วังไชย',
-     'วังใหม่',
-     'บ่อใหญ่',
-     'หนองคูขาด',
-     'บรบือ',
-     'บัวมาศ',
-     'ห้วยเตย',
-     'หนองจิก',
-     'หนองแวง',
-     'ดอนงัว',
-     'เลิงแฝก',
-     'นาโพธิ์',
-     'กุดรัง' ],
-  districtName: null,
-  provinceName: 'มหาสารคาม',
-  zipCode: 44130 }
-
-```
-
-#### 3.2 ใช้ รหัสไปรษณีย์ และ ตำบล
-
-```javascript
-var getAutoSuggestion = thai.getAutoSuggestion(44130, 'เลิงแฝก')
-
-console.log(getAutoSuggestion)
-
-{
-  subDistrict: 'เลิงแฝก',
-  districtName: 'กุดรัง',
-  provinceName: 'มหาสารคาม',
-  zipCode: 44130
-}
-
-```
-
-### 4. แสดงรายชื่อตำบลทั้งหมด ตามรหัสไปรษณีย์
-
-```javascript
-var getSubDistrictNames = thai.getSubDistrictNames(44130);
-
-console.log(getSubDistrictNames)[
-  ("โนนแดง",
-  "หนองโก",
-  "โนนราษี",
-  "หนองสิม",
-  "กำพี้",
-  "หนองม่วง",
-  "ยาง",
-  "วังไชย",
-  "วังใหม่",
-  "บ่อใหญ่",
-  "หนองคูขาด",
-  "บรบือ",
-  "บัวมาศ",
-  "ห้วยเตย",
-  "หนองจิก",
-  "หนองแวง",
-  "ดอนงัว",
-  "เลิงแฝก",
-  "นาโพธิ์",
-  "กุดรัง")
-];
-```
-
-### 5. แสดงรายชื่ออำเภอทั้งหมด ตามรหัสไปรษณีย์
-
-```javascript
-var getDistrictNames = thai.getDistrictNames(44130);
-
-console.log(getDistrictNames)[("กุดรัง", "บรบือ")];
-```
-
-### 6. แสดงชื่อจังหวัด ตามรหัสไปรษณีย์
-
-```javascript
-var getProvinceName = thai.getProvinceName(44130);
-
-console.log(getProvinceName);
-
-มหาสารคาม;
-```
