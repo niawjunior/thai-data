@@ -6,6 +6,10 @@
 
 A TypeScript/JavaScript library providing Thailand's address data including districts, sub-districts, and provinces with postal code reference.
 
+## Demo
+
+[https://thai-data.vercel.app](https://thai-data.vercel.app)
+
 ## Features
 
 - 📦 **TypeScript Support**: Full type definitions included
@@ -150,10 +154,6 @@ Contributions are welcome! Please feel free to submit a Pull Request.
    npm test
    ```
 5. Submit a pull request
-
-## License
-
-ISC © [Niaw Junior](https://github.com/niawjunior)
 
 ## Examples
 
