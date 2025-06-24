@@ -1,72 +1,154 @@
-[![npm version](https://badge.fury.io/js/thai-data.svg)](https://badge.fury.io/js/thai-data)
+[![npm version](https://badge.fury.io/js/thai-data.svg)](https://badge.fury.io/js/thai-data) [![TypeScript](https://img.shields.io/badge/TypeScript-007ACC?style=flat&logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
 
-## รวมข้อมูล ตำบล อำเภอ และ จังหวัด ในประเทศไทย (77 จังหวัด) อ้างอิงตาม รหัสไปรษณีย์ไทย
+# Thai Address Data
 
-- สำหรับคนที่สนใจอยาก contribute สามารถส่ง pull request มาได้ที่ https://github.com/niawjunior/thai-data
+A TypeScript/JavaScript library providing Thailand's address data including districts, sub-districts, and provinces with postal code reference.
 
-## ดูตัวอย่าง การนำไปใช้งาน https://thai-data.netlify.com/
+## Features
 
-## โค้ดตัวอย่าง (react) https://github.com/niawjunior/demo-thai-data
+- 📦 **TypeScript Support**: Full type definitions included
+- 🚀 **ES Modules & CommonJS**: Works with both `import` and `require`
+- 🔍 **Multiple Query Methods**: Search by postal code, district, sub-district, etc.
+- 📏 **Lightweight**: Only includes essential data
+- 🛠 **Well-Tested**: Comprehensive test coverage
 
-<br>
+## Installation
 
-### วิธีติดตั้งใช้งาน
+```bash
+npm install thai-data
+# or
+yarn add thai-data
+```
 
-`npm i thai-data -s`
+## Usage
 
-### วิธีเรียกใช้งาน
+### TypeScript / ES Modules
 
-`var thai = require('thai-data')`
+```typescript
+import {
+  getDataForZipCode,
+  getSubDistrictNames,
+  getDistrictNames,
+  getProvinceName,
+  getAutoSuggestion,
+  getAllData,
+} from 'thai-data';
 
-### ตัวอย่างโครงสร้าง ของข้อมูล
+// Get all data for a specific postal code
+const addressData = getDataForZipCode('10110');
 
-![alt text](demo/demo.png)
+// Get sub-district names for a postal code
+const subDistricts = getSubDistrictNames('10110');
 
-### มีทั้งหมด 6 function ด้วยกัน ดังนี้
+// Get district names for a postal code
+const districts = getDistrictNames('10110');
 
-![alt text](demo/methods.png)
+// Get province name for a postal code
+const province = getProvinceName('10110');
 
-### 1. เรียกดูข้อมูลที่มีอยู่ทั้งหมด (ทั่วประเทศ)
+// Get address suggestions
+const suggestion = getAutoSuggestion('10110', 'บางรัก');
+
+// Get all address data
+const allData = getAllData();
+```
+
+### CommonJS
 
 ```javascript
-var getAllData = thai.getAllData()
+const {
+  getDataForZipCode,
+  getSubDistrictNames,
+  // ... other functions
+} = require('thai-data');
 
-console.log(getAllData)
+const addressData = getDataForZipCode('10110');
+console.log(addressData);
+```
 
-{
-  zipCode: '46180',
-    subDistrictList:
-     [ [Object],
-       [Object],
-       [Object],
-       [Object],
-       [Object],
-       [Object],
-       [Object],
-       [Object],
-       [Object],
-       [Object] ],
-    districtList: [ [Object], [Object] ],
-    provinceList: [ [Object] ]
-},
-{
-  zipCode: '46190',
-    subDistrictList:
-     [ [Object], [Object], [Object], [Object], [Object], [Object] ],
-    districtList: [ [Object] ],
-    provinceList: [ [Object] ] },
-{
-  zipCode: '46230',
-    subDistrictList: [ [Object], [Object], [Object], [Object], [Object] ],
-    districtList: [ [Object] ],
-    provinceList: [ [Object] ]
+## API Reference
+
+### `getDataForZipCode(zipCode: string | number): ZipCodeData | null`
+
+Get complete address data for a specific postal code.
+
+### `getSubDistrictNames(zipCode: string | number): string[]`
+
+Get all sub-district names for a given postal code.
+
+### `getDistrictNames(zipCode: string | number): string[]`
+
+Get all district names for a given postal code.
+
+### `getProvinceName(zipCode: string | number): string | null`
+
+Get the province name for a given postal code.
+
+### `getAutoSuggestion(zipCode: string | number, subDistrict?: string): AddressSuggestion`
+
+Get address suggestions based on postal code and optional sub-district.
+
+### `getAllData(): ZipCodeData[]`
+
+Get all address data.
+
+## Type Definitions
+
+```typescript
+interface SubDistrict {
+  subDistrictId: string;
+  districtId: string;
+  provinceId: string;
+  subDistrictName: string;
 }
-{
-  ...
-},
-{
-  ...
+
+interface District {
+  districtId: string;
+  proviceId: string;
+  districtName: string;
 }
+
+interface Province {
+  provinceId: string;
+  provinceName: string;
+}
+
+interface ZipCodeData {
+  zipCode: string;
+  subDistrictList: SubDistrict[];
+  districtList: District[];
+  provinceList: Province[];
+}
+
+interface AddressSuggestion {
+  subDistrict: string | string[] | null;
+  districtName: string | null;
+  provinceName: string | null;
+  zipCode: string | null;
+}
+```
+
+## Contributing
+
+Contributions are welcome! Please feel free to submit a Pull Request.
+
+### Development Setup
+
+1. Fork the repository
+2. Install dependencies:
+   ```bash
+   npm install
+   ```
+3. Make your changes
+4. Run tests:
+   ```bash
+   npm test
+   ```
+5. Submit a pull request
+
+## License
+
+ISC © [Niaw Junior](https://github.com/niawjunior)
 ```
 
 ### 2. เรียกดูข้อมูลตามรหัสไปรษณีย์
