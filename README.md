@@ -155,6 +155,43 @@ Contributions are welcome! Please feel free to submit a Pull Request.
    ```
 5. Submit a pull request
 
+## Migration from v2 to v3
+
+In v3, we've updated the function names to be more descriptive and consistent. Here's how to migrate from v2 to v3:
+
+| v2                    | v3                         | Description                                 |
+| --------------------- | -------------------------- | ------------------------------------------- |
+| `getDataForZipCode`   | `getAddressByZipCode`      | Get complete address data for a postal code |
+| `getSubDistrictNames` | `getSubdistrictsByZipCode` | Get sub-district names for a postal code    |
+| `getDistrictNames`    | `getDistrictsByZipCode`    | Get district names for a postal code        |
+| `getProvinceName`     | `getProvinceByZipCode`     | Get province name for a postal code         |
+| `getAutoSuggestion`   | `getAddressSuggestions`    | Get address suggestions                     |
+| `getAllData`          | `getAllAddressData`        | Get all address data                        |
+
+### Example Migration
+
+```javascript
+// v2
+const {
+  getDataForZipCode,
+  getSubDistrictNames,
+  getDistrictNames,
+  getProvinceName,
+  getAutoSuggestion,
+  getAllData,
+} = require("thai-data");
+
+// v3
+const {
+  getAddressByZipCode,
+  getSubdistrictsByZipCode,
+  getDistrictsByZipCode,
+  getProvinceByZipCode,
+  getAddressSuggestions,
+  getAllAddressData,
+} = require("thai-data");
+```
+
 ## Examples
 
 ### Get Address by Zip Code
