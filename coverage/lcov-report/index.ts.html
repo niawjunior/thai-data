@@ -332,7 +332,7 @@ const zipCodes = addressData.map((item) =&gt; item.zipCode);
  * @param zipCode - 5-digit Thai postal code
  * @returns Address data for the zip code or null if not found
  */
-export function getDataForZipCode(zipCode: string | number): ZipCodeData | null {
+export function getAddressByZipCode(zipCode: string | number): ZipCodeData | null {
   const zip = String(zipCode);
   return zip &amp;&amp; zip.length === 5 &amp;&amp; zipCodes.includes(zip)
     ? addressData.find((item) =&gt; item.zipCode === zip) || <span class="branch-1 cbranch-no" title="branch not covered" >null</span>
@@ -344,10 +344,10 @@ export function getDataForZipCode(zipCode: string | number): ZipCodeData | null 
  * @param zipCode - 5-digit Thai postal code
  * @returns Array of sub-district names or empty array if not found
  */
-export function getSubDistrictNames(zipCode: string | number): string[] {
-  const dataForZipCode = getDataForZipCode(zipCode);
+export function getSubdistrictsByZipCode(zipCode: string | number): string[] {
+  const dataForZipCode = getAddressByZipCode(zipCode);
   return dataForZipCode
-    ? dataForZipCode.subDistrictList.map((item) =&gt; item.subDistrictName)
+    ? dataForZipCode.subDistrictList.map((item: { subDistrictName: string }) =&gt; item.subDistrictName)
     : [];
 }
 &nbsp;
@@ -356,10 +356,10 @@ export function getSubDistrictNames(zipCode: string | number): string[] {
  * @param zipCode - 5-digit Thai postal code
  * @returns Array of district names or empty array if not found
  */
-export function getDistrictNames(zipCode: string | number): string[] {
-  const dataForZipCode = getDataForZipCode(zipCode);
+export function getDistrictsByZipCode(zipCode: string | number): string[] {
+  const dataForZipCode = getAddressByZipCode(zipCode);
   return dataForZipCode
-    ? dataForZipCode.districtList.map((item) =&gt; item.districtName)
+    ? dataForZipCode.districtList.map((item: { districtName: string }) =&gt; item.districtName)
     : <span class="branch-1 cbranch-no" title="branch not covered" >[];</span>
 }
 &nbsp;
@@ -368,8 +368,8 @@ export function getDistrictNames(zipCode: string | number): string[] {
  * @param zipCode - 5-digit Thai postal code
  * @returns Province name or null if not found
  */
-export function getProvinceName(zipCode: string | number): string | null {
-  const dataForZipCode = getDataForZipCode(zipCode);
+export function getProvinceByZipCode(zipCode: string | number): string | null {
+  const dataForZipCode = getAddressByZipCode(zipCode);
   return dataForZipCode ? dataForZipCode.provinceList[0]<span class="branch-0 cbranch-no" title="branch not covered" >?.p</span>rovinceName ?? <span class="branch-1 cbranch-no" title="branch not covered" >null </span>: null;
 }
 &nbsp;
@@ -379,7 +379,7 @@ export function getProvinceName(zipCode: string | number): string | null {
  * @param subDistrict - Optional sub-district name for more specific results
  * @returns Address suggestion object with matching address components
  */
-export function getAutoSuggestion(
+export function getAddressSuggestions(
   zipCode: string | number,
   subDistrict?: string
 ): AddressSuggestion {
@@ -394,7 +394,7 @@ export function getAutoSuggestion(
     };
   }
 &nbsp;
-  const dataForZipCode = getDataForZipCode(zip);
+  const dataForZipCode = getAddressByZipCode(zip);
   <span class="missing-if-branch" title="if path not taken" >I</span>if (!dataForZipCode) {
 <span class="cstat-no" title="statement not covered" >    return {</span>
       subDistrict: null,
@@ -407,28 +407,28 @@ export function getAutoSuggestion(
   if (!subDistrict) {
     return {
       subDistrict: dataForZipCode.subDistrictList.map(
-        (item) =&gt; item.subDistrictName
+        (item: { subDistrictName: string }) =&gt; item.subDistrictName
       ),
       districtName: null,
-      provinceName: getProvinceName(zip),
+      provinceName: getProvinceByZipCode(zip),
       zipCode: zip,
     };
   }
 &nbsp;
   const subDistrictData = dataForZipCode.subDistrictList.find(
-    (item) =&gt; item.subDistrictName === subDistrict
+    (item: { subDistrictName: string }) =&gt; item.subDistrictName === subDistrict
   );
   
   const districtName = subDistrictData 
     ? dataForZipCode.districtList.find(
-        (item) =&gt; item.districtId === subDistrictData.districtId
+        (item: { districtId: string }) =&gt; item.districtId === subDistrictData.districtId
       )<span class="branch-0 cbranch-no" title="branch not covered" >?.d</span>istrictName ?? <span class="branch-1 cbranch-no" title="branch not covered" >null</span>
     : <span class="branch-1 cbranch-no" title="branch not covered" >null;</span>
 &nbsp;
   return {
     subDistrict,
     districtName,
-    provinceName: getProvinceName(dataForZipCode.zipCode),
+    provinceName: getProvinceByZipCode(dataForZipCode.zipCode),
     zipCode: zip,
   };
 }
@@ -437,18 +437,18 @@ export function getAutoSuggestion(
  * Get all address data
  * @returns Complete address data array
  */
-export function getAllData(): ZipCodeData[] {
+export function getAllAddressData(): ZipCodeData[] {
   return [...addressData];
 }
 &nbsp;
 // For CommonJS default export support
 export default {
-  getSubDistrictNames,
-  getDistrictNames,
-  getProvinceName,
-  getAllData,
-  getAutoSuggestion,
-  getDataForZipCode,
+  getSubdistrictsByZipCode,
+  getDistrictsByZipCode,
+  getProvinceByZipCode,
+  getAllAddressData,
+  getAddressSuggestions,
+  getAddressByZipCode,
 };
 &nbsp;</pre></td></tr></table></pre>
 
@@ -457,7 +457,7 @@ export default {
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2025-06-24T07:53:32.041Z
+                at 2025-06-24T08:24:14.305Z
             </div>
         <script src="prettify.js"></script>
         <script>
