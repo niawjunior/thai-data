@@ -61,4 +61,5 @@ jobs:
         run: npx eslint "src/**/*.ts" --ext .ts --no-error-on-unmatched-pattern --ignore-pattern '**/*.d.ts' --ignore-pattern 'dist/'
 
       - name: Lint test files (without type checking)
-        run: npx eslint "./__tests__/*.ts" --config .eslintrc.test.js --no-ignore
+        run: |
+          npx eslint $(find __tests__ -name "*.ts") --config .eslintrc.test.js --no-ignore
