@@ -155,8 +155,6 @@ Contributions are welcome! Please feel free to submit a Pull Request.
 
 ISC © [Niaw Junior](https://github.com/niawjunior)
 
-````
-
 ## Examples
 
 ### Get Address by Zip Code
@@ -167,20 +165,20 @@ import { getAddressByZipCode } from 'thai-data';
 const addressData = getAddressByZipCode('10110');
 
 console.log(addressData);
-// {
-//   zipCode: '10110',
-//   subDistrictList: [
-//     { subDistrictId: '100101', districtId: '1001', provinceId: '10', subDistrictName: 'พระบรมมหาราชวัง' },
-//     // ... more sub-districts
-//   ],
-//   districtList: [
-//     { districtId: '1001', provinceId: '10', districtName: 'พระนคร' },
-//     // ... more districts
-//   ],
-//   provinceList: [
-//     { provinceId: '10', provinceName: 'กรุงเทพมหานคร' }
-//   ]
-// }
+{
+  zipCode: '10110',
+  subDistrictList: [
+    { subDistrictId: '100101', districtId: '1001', provinceId: '10', subDistrictName: 'พระบรมมหาราชวัง' },
+    // ... more sub-districts
+  ],
+  districtList: [
+    { districtId: '1001', provinceId: '10', districtName: 'พระนคร' },
+    // ... more districts
+  ],
+  provinceList: [
+    { provinceId: '10', provinceName: 'กรุงเทพมหานคร' }
+  ]
+}
 ```
 
 ### Get Address Suggestions
@@ -191,35 +189,34 @@ import { getAddressSuggestions } from 'thai-data';
 // Get suggestions with just zip code
 const suggestions = getAddressSuggestions('10110');
 console.log(suggestions);
-// {
-//   subDistrict: [...], // Array of all sub-districts for this zip code
-//   districtName: '...', // Single district name if only one exists
-//   provinceName: '...', // Province name
-//   zipCode: '10110'
-// }
+{
+  subDistrict: [...], // Array of all sub-districts for this zip code
+  districtName: '...', // Single district name if only one exists
+  provinceName: '...', // Province name
+  zipCode: '10110'
+}
 
 // Get suggestions with zip code and sub-district filter
 const filteredSuggestions = getAddressSuggestions('10110', 'บางรัก');
 console.log(filteredSuggestions);
-// {
-//   subDistrict: 'บางรัก', // Matching sub-district name
-//   districtName: 'บางรัก', // District name
-//   provinceName: 'กรุงเทพมหานคร', // Province name
-//   zipCode: '10500' // Matching zip code
-// }
+{
+  subDistrict: 'บางรัก', // Matching sub-district name
+  districtName: 'บางรัก', // District name
+  provinceName: 'กรุงเทพมหานคร', // Province name
+  zipCode: '10500' // Matching zip code
+}
 ```
 
 ### Get All Address Data
 
 ```typescript
-import { getAllAddressData } from 'thai-data';
+import { getAllAddressData } from "thai-data";
 
 const allAddresses = getAllAddressData();
 console.log(`Total zip codes: ${allAddresses.length}`);
 // Output: Total zip codes: [number of zip codes]
 ```
 
-## License
+```
 
-ISC © [Niaw Junior](https://github.com/niawjunior)
-````
+```
