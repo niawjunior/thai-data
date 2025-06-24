@@ -30,11 +30,11 @@ jobs:
       - name: Run tests with coverage
         run: npm run test:coverage
 
-      - name: Upload coverage to Codecov
-        if: github.event_name != 'pull_request'
-        uses: codecov/codecov-action@v3
+      - name: Upload coverage reports to Codecov
+        uses: codecov/codecov-action@v5
         with:
-          token: ${{ secrets.CODECOV_TOKEN || 'dummy-token' }}
+          token: ${{ secrets.CODECOV_TOKEN }}
+          slug: niawjunior/thai-data
           file: ./coverage/lcov.info
           fail_ci_if_error: false
 
