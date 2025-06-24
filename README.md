@@ -1,4 +1,7 @@
-[![npm version](https://badge.fury.io/js/thai-data.svg)](https://badge.fury.io/js/thai-data) [![TypeScript](https://img.shields.io/badge/TypeScript-007ACC?style=flat&logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
+[![npm version](https://badge.fury.io/js/thai-data.svg)](https://badge.fury.io/js/thai-data)
+[![TypeScript](https://img.shields.io/badge/TypeScript-007ACC?style=flat&logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
+[![Test Coverage](https://img.shields.io/codecov/c/github/niawjunior/thai-data?token=YOUR_CODECOV_TOKEN)](https://codecov.io/gh/niawjunior/thai-data)
+[![CI](https://github.com/niawjunior/thai-data/actions/workflows/ci.yml/badge.svg)](https://github.com/niawjunior/thai-data/actions/workflows/ci.yml)
 
 # Thai Address Data
 
@@ -32,22 +35,22 @@ import {
   getProvinceName,
   getAutoSuggestion,
   getAllData,
-} from 'thai-data';
+} from "thai-data";
 
 // Get all data for a specific postal code
-const addressData = getDataForZipCode('10110');
+const addressData = getDataForZipCode("10110");
 
 // Get sub-district names for a postal code
-const subDistricts = getSubDistrictNames('10110');
+const subDistricts = getSubDistrictNames("10110");
 
 // Get district names for a postal code
-const districts = getDistrictNames('10110');
+const districts = getDistrictNames("10110");
 
 // Get province name for a postal code
-const province = getProvinceName('10110');
+const province = getProvinceName("10110");
 
 // Get address suggestions
-const suggestion = getAutoSuggestion('10110', 'บางรัก');
+const suggestion = getAutoSuggestion("10110", "บางรัก");
 
 // Get all address data
 const allData = getAllData();
@@ -60,9 +63,9 @@ const {
   getDataForZipCode,
   getSubDistrictNames,
   // ... other functions
-} = require('thai-data');
+} = require("thai-data");
 
-const addressData = getDataForZipCode('10110');
+const addressData = getDataForZipCode("10110");
 console.log(addressData);
 ```
 
@@ -149,7 +152,8 @@ Contributions are welcome! Please feel free to submit a Pull Request.
 ## License
 
 ISC © [Niaw Junior](https://github.com/niawjunior)
-```
+
+````
 
 ### 2. เรียกดูข้อมูลตามรหัสไปรษณีย์
 
@@ -245,7 +249,7 @@ console.log(getDataForZipCode)
      { districtId: '482', proviceId: '32', districtName: 'บรบือ' } ],
   provinceList: [ { provinceId: '32', provinceName: 'มหาสารคาม' } ] }
 
-```
+````
 
 ### 3. ข้อหาข้อมูลแบบอัตโนมัติ โดย ใช้รหัสไปรษณีย์ และ ตำบล หรือ ใช้รหัสไปรษณีย์ เพียงอย่างเดียว
 
