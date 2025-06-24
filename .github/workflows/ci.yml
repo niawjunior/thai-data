@@ -2,9 +2,9 @@ name: CI
 
 on:
   push:
-    branches: [ master ]
+    branches: [master]
   pull_request:
-    branches: [ master ]
+    branches: [master]
 
 jobs:
   test:
@@ -16,46 +16,49 @@ jobs:
         node-version: [14.x, 16.x, 18.x]
 
     steps:
-    - uses: actions/checkout@v3
+      - uses: actions/checkout@v3
 
-    - name: Use Node.js ${{ matrix.node-version }}
-      uses: actions/setup-node@v3
-      with:
-        node-version: ${{ matrix.node-version }}
-        cache: 'npm'
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: "npm"
 
-    - name: Install dependencies
-      run: npm ci
+      - name: Install dependencies
+        run: npm ci
 
-    - name: Run tests with coverage
-      run: npm run test:coverage
+      - name: Run tests with coverage
+        run: npm run test:coverage
 
-    - name: Upload coverage to Codecov
-      if: github.event_name != 'pull_request'
-      uses: codecov/codecov-action@v3
-      with:
-        token: ${{ secrets.CODECOV_TOKEN || 'dummy-token' }}
-        file: ./coverage/lcov.info
-        fail_ci_if_error: false
+      - name: Upload coverage to Codecov
+        if: github.event_name != 'pull_request'
+        uses: codecov/codecov-action@v3
+        with:
+          token: ${{ secrets.CODECOV_TOKEN || 'dummy-token' }}
+          file: ./coverage/lcov.info
+          fail_ci_if_error: false
 
   lint:
-    name: Lint
+    name: Lint and Type Check
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v3
+      - uses: actions/checkout@v3
 
-    - name: Use Node.js 18.x
-      uses: actions/setup-node@v3
-      with:
-        node-version: '18.x'
-        cache: 'npm'
+      - name: Use Node.js 18.x
+        uses: actions/setup-node@v3
+        with:
+          node-version: "18.x"
+          cache: "npm"
 
-    - name: Install dependencies
-      run: npm ci
+      - name: Install dependencies
+        run: npm ci
 
-    - name: Run TypeScript type check
-      run: npx tsc --noEmit
+      - name: Run TypeScript type check
+        run: npx tsc --noEmit
 
-    - name: Run ESLint
-      run: npx eslint . --ext .ts
+      - name: Lint source files (with type checking)
+        run: npx eslint "src/**/*.ts" --ext .ts --no-error-on-unmatched-pattern --ignore-pattern '**/*.d.ts' --ignore-pattern 'dist/'
+
+      - name: Lint test files (without type checking)
+        run: npx eslint "./__tests__/*.ts" --config .eslintrc.test.js --no-ignore

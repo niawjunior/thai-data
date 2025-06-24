@@ -32,13 +32,16 @@
   },
   "homepage": "https://github.com/niawjunior/thai-data#readme",
   "devDependencies": {
+    "@eslint/js": "^9.8.0",
     "@testing-library/jest-dom": "^6.6.3",
     "@types/jest": "^30.0.0",
     "@types/node": "^20.0.0",
     "@typescript-eslint/eslint-plugin": "^8.35.0",
     "@typescript-eslint/parser": "^8.35.0",
-    "eslint": "^9.29.0",
+    "eslint": "^9.8.0",
     "eslint-config-prettier": "^10.1.5",
+    "eslint-plugin-jest": "^29.0.1",
+    "globals": "^15.0.0",
     "jest": "^30.0.2",
     "ts-jest": "^29.4.0",
     "typescript": "^5.0.0"
