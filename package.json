@@ -12,7 +12,10 @@
     "build": "tsc",
     "prepare": "npm run build",
     "prepublishOnly": "npm run build",
-    "test": "jest"
+    "test": "jest",
+    "test:coverage": "jest --coverage",
+    "lint": "eslint . --ext .js,.ts --no-error-on-unmatched-pattern --ignore-pattern '**/*.d.ts' --ignore-pattern 'dist/'",
+    "lint:fix": "eslint . --ext .js,.ts --no-error-on-unmatched-pattern --ignore-pattern '**/*.d.ts' --ignore-pattern 'dist/' --fix"
   },
   "repository": {
     "type": "git",
